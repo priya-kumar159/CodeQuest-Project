@@ -1,0 +1,94 @@
+{
+  "happy": [
+    {
+      "id": "happy_1",
+      "title": "Reverse a String",
+      "description": "Write a function that returns the reverse of a given string.",
+      "points": 10,
+      "solution": "def reverse_string(s):\n  return s[::-1]"
+    },
+    {
+      "id": "happy_2",
+      "title": "Find Max Number",
+      "description": "Write a function that finds the max number in a list.",
+      "points": 15,
+      "solution": "def find_max(numbers):\n  return max(numbers)"
+    },
+    {
+      "id": "happy_3",
+      "title": "Check Palindrome",
+      "description": "Write a function that checks if a string is a palindrome.",
+      "points": 20,
+      "solution": "def is_palindrome(s):\n  s = s.lower().replace(' ', '')\n  return s == s[::-1]"
+    }
+  ],
+  "tired": [
+    {
+      "id": "tired_1",
+      "title": "Warmup loop",
+      "description": "Print numbers 1 to 5 using a loop.",
+      "points": 5,
+      "solution": "for i in range(1, 6):\n  print(i)"
+    },
+    {
+      "id": "tired_2",
+      "title": "Simple 'if' check",
+      "description": "Write an if-statement that checks if a number is positive.",
+      "points": 5,
+      "solution": "num = 10\nif num > 0:\n  print('Positive')"
+    },
+    {
+      "id": "tired_3",
+      "title": "Hello, World!",
+      "description": "Write a function that returns the string 'Hello, World!'.",
+      "points": 5,
+      "solution": "def hello():\n  return 'Hello, World!'"
+    }
+  ],
+  "excited": [
+    {
+      "id": "excited_1",
+      "title": "Mini calculator",
+      "description": "Create add/sub/mul/div functions.",
+      "points": 20,
+      "solution": "def add(a, b):\n  return a + b\n\ndef sub(a, b):\n  return a - b"
+    },
+    {
+      "id": "excited_2",
+      "title": "FizzBuzz",
+      "description": "Print numbers 1 to 20. For multiples of 3 print 'Fizz', for 5 print 'Buzz', for both print 'FizzBuzz'.",
+      "points": 25,
+      "solution": "for i in range(1, 21):\n  if i % 15 == 0:\n    print('FizzBuzz')\n  elif i % 3 == 0:\n    print('Fizz')\n  elif i % 5 == 0:\n    print('Buzz')\n  else:\n    print(i)"
+    },
+    {
+      "id": "excited_3",
+      "title": "Factorial",
+      "description": "Write a function that calculates the factorial of a number.",
+      "points": 30,
+      "solution": "def factorial(n):\n  if n == 0:\n    return 1\n  else:\n    return n * factorial(n-1)"
+    }
+  ],
+  "sad": [
+    {
+      "id": "sad_1",
+      "title": "Gratitude list",
+      "description": "Create a list of 3 things you're grateful for and print them.",
+      "points": 5,
+      "solution": "grateful = [\"Family\", \"Health\", \"Friends\"]\nfor item in grateful:\n  print(item)"
+    },
+    {
+      "id": "sad_2",
+      "title": "Sum of a List",
+      "description": "Write a function that returns the sum of all numbers in a list.",
+      "points": 10,
+      "solution": "def sum_list(numbers):\n  return sum(numbers)"
+    },
+    {
+      "id": "sad_3",
+      "title": "Positive Quote",
+      "description": "Create a variable holding a positive quote and print it.",
+      "points": 5,
+      "solution": "quote = \"Every day is a new beginning.\"\nprint(quote)"
+    }
+  ]
+}

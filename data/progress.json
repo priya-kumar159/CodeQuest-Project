@@ -1,0 +1,47 @@
+{
+  "total_points": 50,
+  "entries": [
+    {
+      "timestamp": "2025-10-24T12:31:26.311415",
+      "mood": "happy",
+      "challenge_id": "happy_1",
+      "points": 10,
+      "title": "Reverse a String"
+    },
+    {
+      "timestamp": "2025-10-24T12:37:08.149705",
+      "mood": "tired",
+      "challenge_id": "tired_1",
+      "points": 5,
+      "title": "Warmup loop"
+    },
+    {
+      "timestamp": "2025-10-24T12:41:15.906747",
+      "mood": "excited",
+      "challenge_id": "excited_1",
+      "points": 20,
+      "title": "Mini calculator"
+    },
+    {
+      "timestamp": "2025-10-24T12:50:43.062300",
+      "mood": "sad",
+      "challenge_id": "sad_1",
+      "points": 5,
+      "title": "Gratitude list"
+    },
+    {
+      "timestamp": "2025-10-24T12:52:34.466068",
+      "mood": "tired",
+      "challenge_id": "tired_1",
+      "points": 5,
+      "title": "Warmup loop"
+    },
+    {
+      "timestamp": "2025-10-24T13:52:52.078759",
+      "mood": "sad",
+      "challenge_id": "sad_1",
+      "points": 5,
+      "title": "Gratitude list"
+    }
+  ]
+}
