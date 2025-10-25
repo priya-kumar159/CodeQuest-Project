@@ -1,4 +1,4 @@
-# app.py (Poora code - Solution Box Theek Kar Diya)
+# app.py (Final, Bug-Free Version - Includes all UI and Persistence Fixes)
 import streamlit as st
 import json
 import os
@@ -16,13 +16,14 @@ SHEET_TITLE = "CodeQuest_Progress"
 
 @st.cache_resource(ttl=3600)
 def get_gsheet_client():
-    """Google Sheets client ko Streamlit Secrets se authenticate karta hai."""
+    """Authenticates the Google Sheets client using Streamlit Secrets."""
     try: 
+        # Attempt to use st.secrets (for deployment)
         gc = gspread.service_account_from_dict(st.secrets)
         return gc
     except Exception as e:
         try:
-            # Yeh local run ke liye service_account.json file dhoondhega
+            # Fallback for local run using service_account.json file
             gc = gspread.service_account(filename="service_account.json")
             return gc
         except Exception as e2:
@@ -31,7 +32,7 @@ def get_gsheet_client():
             return None
 
 def load_progress_data():
-    """Google Sheet se saara progress data load karta hai."""
+    """Loads all progress data from the Google Sheet."""
     gc = get_gsheet_client()
     if not gc: return pd.DataFrame(columns=['timestamp', 'mood', 'challenge_id', 'points', 'title'])
     try:
@@ -43,7 +44,7 @@ def load_progress_data():
         return pd.DataFrame(columns=['timestamp', 'mood', 'challenge_id', 'points', 'title'])
 
 def add_progress_gsheet(challenge, mood):
-    """Naya entry Google Sheet mein append karta hai."""
+    """Appends a new entry to the Google Sheet."""
     gc = get_gsheet_client()
     if not gc: return 0 
 
@@ -64,7 +65,7 @@ def add_progress_gsheet(challenge, mood):
         st.error(f"Error saving progress: {e}")
         return 0
 
-# --- Default Data, Utility Functions (Puraane) ---
+# --- Default Data, Utility Functions ---
 
 EMOJI_MAP = {"😊": "happy", "🙂": "happy", "😃": "happy", "😢": "sad", "😥": "sad", "😴": "tired", "😫": "tired", "🤩": "excited", "😄": "excited"}
 MOTIVATIONS = ["Small steps matter! 🚀", "Keep going — small wins stack up!", "Nice work! Consistency is the secret.", "Every line of code counts."]
@@ -116,14 +117,14 @@ if 'motivation_message' not in st.session_state: st.session_state.motivation_mes
 if 'points_message' not in st.session_state: st.session_state.points_message = ""
 
 # Mood input form
-with st.form(key="mood_form", clear_on_submit=True):
+# FIX: Removed 'clear_on_submit=True' to keep the emoji/text in the box.
+with st.form(key="mood_form"):
     mood_input = st.text_input("Enter your mood / emoji:")
     submit_button = st.form_submit_button(label="Submit")
 
     if submit_button and mood_input:
         st.session_state.mood = detect_mood(mood_input)
         st.session_state.current_challenge = pick_challenge(challenges, st.session_state.mood)
-        # Purane messages clear karo
         st.session_state.motivation_message = ""
         st.session_state.points_message = ""
 
@@ -145,13 +146,12 @@ if st.session_state.current_challenge:
             total = add_progress_gsheet(ch, st.session_state.mood)
             st.session_state.points_message = f"Nice! +{ch['points']} pts. Total: {total} pts."
             st.session_state.motivation_message = random.choice(MOTIVATIONS)
-            st.session_state.current_challenge = None
-            # st.rerun()  <-- HATA DIYA
+            # FIX: Do NOT set current_challenge = None. This keeps the challenge visible after submission.
+            # st.session_state.current_challenge = None 
+            # st.rerun() removed.
 
     with col2:
         if st.button("Show Solution"):
-            # *** YAHAN CHANGE KIYA HAI (Blur Fix) ***
-            # Ab solution clear dikhega
             st.code(ch.get("solution", "No solution available"), language="python")
 
     with col3:
@@ -159,7 +159,7 @@ if st.session_state.current_challenge:
             st.session_state.motivation_message = "Skipped. Submit a new mood for a new challenge."
             st.session_state.points_message = ""
             st.session_state.current_challenge = None 
-            # st.rerun()  <-- HATA DIYA
+            # st.rerun() removed.
 
     with col4:
         if st.button("PROGRESS"):
@@ -171,10 +171,10 @@ if st.session_state.current_challenge:
                 st.write("Recent Activity:")
                 st.dataframe(df_progress[['timestamp', 'mood', 'title', 'points']].tail(5).sort_index(ascending=False))
             else:
-                 # Yeh message abhi sahi hai, kyunki aapne 'DONE' nahi dabaya hai
                  st.write("No progress entries found.")
+            # st.rerun() removed.
 
-# Messages display
+# Messages display (Reward/Motivational messages)
 if st.session_state.points_message:
     st.success(st.session_state.points_message)
 if st.session_state.motivation_message:

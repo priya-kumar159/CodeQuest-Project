@@ -12,7 +12,7 @@
       "title": "Find Max Number",
       "description": "Write a function that finds the max number in a list.",
       "points": 15,
-      "solution": "def find_max(numbers):\n  return max(numbers)"
+      "solution": "def find_max(numbers):\n  if not numbers:\n    return None\n  biggest = numbers[0]\n  for number in numbers:\n    if number > biggest:\n      biggest = number\n  return biggest"
     },
     {
       "id": "happy_3",
